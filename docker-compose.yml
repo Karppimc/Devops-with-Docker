@@ -1,0 +1,16 @@
+services:
+  express-app:
+    image: karppimc/simple-express:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    container_name: express-app
+
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=60
+    container_name: watchtower
